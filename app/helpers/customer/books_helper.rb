@@ -1,0 +1,2 @@
+module Customer::BooksHelper
+end
