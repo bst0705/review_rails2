@@ -1,9 +1,10 @@
 <% @tweets.each do |tweet| %>
-<div>
-  <%= attachment_image_tag tweet, :tweet_image %>
-  <p>投稿ユーザー画像：</p>
-  <p>タイトル：<%= tweet.title %></p>
-  <p>内容：<%= tweet.body %></p>
-  <p>ユーザーネーム：<%= tweet.customer.name %></p>
-</div>
+  <div>
+    <%= attachment_image_tag tweet, :tweet_image %>
+    <p>投稿ユーザー画像：</p>
+    <p>タイトル：<%= tweet.title %></p>
+    <p>内容：<%= tweet.body %></p>
+    <p>ユーザーネーム：<%= tweet.customer.name %></p>
+    <p><%= link_to "#{tweet.tweet_comments.count} コメント", tweet_path(tweet.id) %></p>
+  </div>
 <% end %>

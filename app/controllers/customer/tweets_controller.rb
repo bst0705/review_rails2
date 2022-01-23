@@ -15,6 +15,8 @@ class Customer::TweetsController < ApplicationController
   end
 
   def show
+    @tweet = Tweet.find(params[:id])
+    @tweet_comment = Comment.new
   end
 
   def destroy

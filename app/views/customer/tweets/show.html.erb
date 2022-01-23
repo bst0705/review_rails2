@@ -1,0 +1,27 @@
+<div>
+  <%= attachment_image_tag @tweet, :tweet_image %>
+  <p>投稿ユーザー画像：</p>
+  <p>タイトル：<%= @tweet.title %></p>
+  <p>内容：<%= @tweet.body %></p>
+  <p>ユーザーネーム：<%= @tweet.customer.name %></p>
+</div>
+
+<div>
+<p>コメント件数：<%= @tweet.tweet_comments.count %></p>
+<% @tweet.tweet_comments.each do |tweet_comment| %>
+  <p><%= image_tag('sample-author1.jpg') %></p>
+  <%= tweet_comment.customer.name %>
+  <%= tweet_comment.created_at.strftime('%Y/%m/%d') %><%= tweet_comment.comment %>
+  <% if tweet_comment.customer == current_customer %>
+  <div>
+    <%= link_to "削除", tweet_tweet_comment_path(tweet_comment.tweet, tweet_comment), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
+</div>
+<div>
+<%= form_with(model:[@tweet, @tweet_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>

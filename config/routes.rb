@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :customers
   scope module: :customer do
     resources :customers
-    resources :tweets
+    resources :tweets do
+      resources :tweet_comments, only: [:create, :destroy]
+  end
   end
 end
