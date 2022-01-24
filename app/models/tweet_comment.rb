@@ -1,3 +1,3 @@
 class TweetComment < ApplicationRecord
-  belongs :tweet
+  belongs_to :tweet
 end
