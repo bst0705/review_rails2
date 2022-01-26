@@ -1,5 +1,5 @@
 <div>
-  
+
   <p>投稿ユーザー画像：</p>
   <p>タイトル：<%= @tweet.title %></p>
   <p>内容：<%= @tweet.body %></p>
@@ -11,6 +11,19 @@
 <% @tweet.tweet_comments.each do |tweet_comment| %>
   <%= tweet_comment.customer.name %>
   <%= tweet_comment.created_at.strftime('%Y/%m/%d') %><%= tweet_comment.comment %>
+  <% if @tweet.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to tweet_favorites_path(@tweet), method: :delete do %>
+        ♥<%= @tweet.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to tweet_favorites_path(@tweet), method: :post do %>
+        ♡<%= @tweet.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
   <% if tweet_comment.customer == current_customer %>
   <div>
     <%= link_to "削除", tweet_tweet_comment_path(tweet_comment.tweet, tweet_comment), method: :delete %>
