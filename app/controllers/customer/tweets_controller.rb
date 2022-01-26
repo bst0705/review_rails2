@@ -11,7 +11,7 @@ class Customer::TweetsController < ApplicationController
   end
 
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.page(params[:page]).reverse_order
   end
 
   def show
